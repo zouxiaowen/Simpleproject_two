@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -68,9 +69,10 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        myAdpter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
-
+        presenter.requestData("http://gank.io/api/data/%E7%A6%8F%E5%88%A9/10/", mCurrentCounter, getActivity());
+        myAdpter.getData().clear();
+        myAdpter.notifyDataSetChanged();
     }
 
     @Override
@@ -78,7 +80,6 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
         if (mCurrentCounter <= 51) {
             presenter.requestData("http://gank.io/api/data/%E7%A6%8F%E5%88%A9/10/", mCurrentCounter++, getActivity());
         }
-
     }
 
     @Override
@@ -120,7 +121,6 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
     public void showData(List<meizitu.ResultsBean> list) {
         myAdpter.addData(list);
         myAdpter.loadMoreComplete();
-
     }
 
     @Override
@@ -146,13 +146,17 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
     @Override
     public void onError(Exception mssage) {
         Log.d("===", mssage.toString());
+        if (myAdpter!=null){
+            myAdpter.loadMoreFail();//加载失败
+        }
     }
 
     @Override
     public void showSpeechRecognition(String sp) {
-
         text.setText(sp);
     }
+
+
 }
 
 

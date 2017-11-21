@@ -15,19 +15,19 @@ import wen.xiao.com.simpleproject.View_z.simpleview.ProgressHUD;
 public abstract class A_DialogCallback<T> extends A_type<T> {
 
     private ProgressHUD dialog;
-
-    //private ProgressDialog dialog;
-
     private void initDialog(Activity activity) {
         dialog= ProgressHUD.show(activity, "正在加载", false, false, null);
-
-
     }
 
     public A_DialogCallback(Activity activity) {
         super();
-        initDialog(activity);
+
+            initDialog(activity);
+
+
     }
+
+
 
     @Override
     public void onBefore(BaseRequest request) {

@@ -7,12 +7,8 @@ import com.google.gson.Gson;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
-import com.lzy.okgo.OkGo;
 
 import java.util.ArrayList;
-import java.util.List;
-
-
 import okhttp3.Call;
 import okhttp3.Response;
 import wen.xiao.com.simpleproject.Common.entity.Voice;
@@ -32,21 +28,25 @@ public class RecommendPresenter implements RecommendContract.Presenter {
 	}
 	@Override
 	public void requestData(String url, int page, Activity context) {
-        mModel.GetApp(url, page, context, new A_DialogCallback<meizitu>(context) {
-            @Override
-            public void onSuccess(meizitu meizitu, Call call, Response response) {
-                    if (meizitu.getResults()!=null){
+
+            mModel.GetApp(url, page, context, new A_DialogCallback<meizitu>(context) {
+                @Override
+                public void onSuccess(meizitu meizitu, Call call, Response response) {
+                    if (meizitu.getResults() != null) {
                         mview.showData(meizitu.getResults());
-                    }else{
+                    } else {
                         mview.showNull();
                     }
-            }
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                mview.onError(e);
-            }
-        });
+                }
+
+                @Override
+                public void onError(Call call, Response response, Exception e) {
+                    super.onError(call, response, e);
+                    mview.onError(e);
+                }
+            });
+
+
 	}
 
     @Override

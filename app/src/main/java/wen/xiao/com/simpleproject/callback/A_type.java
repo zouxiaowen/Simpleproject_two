@@ -7,6 +7,7 @@ import com.lzy.okgo.callback.AbsCallback;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import okhttp3.Call;
 import okhttp3.Response;
 import wen.xiao.com.simpleproject.Utils_z.Convert;
 
@@ -37,4 +38,6 @@ public abstract class A_type<T> extends AbsCallback<T> {
         response.close();
         return data;
     }
+
+
 }

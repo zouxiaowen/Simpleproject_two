@@ -21,10 +21,10 @@ public interface RecommendContract {
 		void dissMiss();
 		void onError(Exception mssage);
 		void showSpeechRecognition(String sp);
+
 	}
 	interface Presenter extends BasePresenter {
-		public void requestData(String url, int page, Activity context );
-
+		void requestData(String url, int page, Activity context );
         void SpeechRecognition(Context context);
     }
 
