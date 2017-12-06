@@ -102,6 +102,8 @@
         <activity android:name=".Imag_kan.ImagePagerActivity"></activity>
         <activity android:name=".preview.ImageDetail"/>
         <service android:name="com.amap.api.location.APSService"></service>
+
+        <activity android:name=".preview.ImageDetailType"/>
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.iflytek.cloud.SpeechConstant;
@@ -26,6 +27,7 @@ import wen.xiao.com.simpleproject.Common.presenter.Contract.RecommendContract;
 import wen.xiao.com.simpleproject.Common.presenter.RecommendPresenter;
 import wen.xiao.com.simpleproject.R;
 import wen.xiao.com.simpleproject.View_z.SearviewActivity;
+import wen.xiao.com.simpleproject.preview.ImageDetailType;
 
 
 public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener, RecommendContract.View {
@@ -36,6 +38,11 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
     RecommendContract.Presenter presenter;
     private ImageView search;
     private TextView text;
+
+    /**
+     * 传图片地址
+     */
+    public static final String KEY_IMG_PATH = "infoList";
 
     @Override
     protected View initView() {
@@ -64,9 +71,25 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
         myAdpter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);//开启动画
         myAdpter.setOnLoadMoreListener(CommonFrameFragment.this, recycler);
         recycler.setAdapter(myAdpter);
+        AdpterOnclick();
+    }
+    /*item 点击事件*/
+    private void AdpterOnclick() {
+        myAdpter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                meizitu.ResultsBean data= (meizitu.ResultsBean) adapter.getItem(position);
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ImageDetailType.class);
+                intent.putExtra(KEY_IMG_PATH, data.getUrl());
+                startActivity(intent);
+            }
+        });
+
+
     }
 
-
+    /*下拉刷新*/
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(false);
@@ -75,6 +98,9 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
         myAdpter.notifyDataSetChanged();
     }
 
+    /**
+     * 上拉加载
+     */
     @Override
     public void onLoadMoreRequested() {
         if (mCurrentCounter <= 51) {
