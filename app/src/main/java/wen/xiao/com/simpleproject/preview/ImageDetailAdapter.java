@@ -77,7 +77,7 @@ public class ImageDetailAdapter extends PagerAdapter {
         }
         Log.d("====",url);
         //Glide.with(mContext).load(url).into(view);
-        Glide.with(mContext).load(url).placeholder(R.mipmap.ic_launcher).into(view);
+        Glide.with(mContext).load(url).placeholder(R.mipmap.placeholder).into(view);
         container.addView(view);
         return view;
     }

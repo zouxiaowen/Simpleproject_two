@@ -21,7 +21,7 @@ import wen.xiao.com.simpleproject.R;
 
 public class ImageDetailType extends Activity {
 
-    ImageView imageView;
+    PhotoView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +32,37 @@ public class ImageDetailType extends Activity {
     }
 
     protected void initValues() {
-        imageView= (ImageView) findViewById(R.id.image);
+        imageView= (PhotoView) findViewById(R.id.image);
         /*获取Bundle中的数据，注意类型和key*/
         String url = getIntent().getExtras().getString("infoList");
         Glide.with(this)
                 .load(url)
-                .placeholder(R.mipmap.ic_launcher) //占位图
-                .error(R.mipmap.ic_launcher)  //出错的占位图
+                .placeholder(R.mipmap.placeholder) //占位图
+                .error(R.mipmap.placeholder)  //出错的占位图
                 // .animate(R.anim.glide_anim)
                 .centerCrop()
                 .fitCenter()
                 .into(imageView);
+
+        imageView.enable();
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                if (longPressListener != null) longPressListener.longPress(position);
+//                return true;
+//            }
+//        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                 finish();
+            }
+        });
+
     }
 
 }
