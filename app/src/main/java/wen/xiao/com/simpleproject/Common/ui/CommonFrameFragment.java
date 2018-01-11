@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,7 @@ public class CommonFrameFragment extends BaseFragment implements SwipeRefreshLay
         myAdpter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);//开启动画
         myAdpter.setOnLoadMoreListener(CommonFrameFragment.this, recycler);
         recycler.setAdapter(myAdpter);
+        //设置item之间的间隔
         AdpterOnclick();
     }
     /*item 点击事件*/
